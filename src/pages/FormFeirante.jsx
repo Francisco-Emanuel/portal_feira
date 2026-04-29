@@ -2,52 +2,47 @@ export default function FormFeirante({ navegar }) {
   
   const handleSubmit = (e) => {
     e.preventDefault(); 
-    
-    
-    alert('Feirante guardado com sucesso!');
     navegar('listaFeirante');
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
-      <div className="form-group">
-        <label>Nome do Feirante *</label>
-        <input 
-          type="text" 
-          required 
-          placeholder="Digite o nome completo ou nome da banca" 
-        />
+    <div>
+      <div className="page-header">
+        <h2>Cadastrar Feirante</h2>
       </div>
 
-      <div className="form-group">
-        <label>CPF ou CNPJ *</label>
-        <input 
-          type="text" 
-          required 
-          placeholder="000.000.000-00 ou 00.000.000/0000-00" 
-        />
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-grid two-cols">
+          <div className="form-group">
+            <label>Nome do Feirante / Banca *</label>
+            <input type="text" className="form-control" required placeholder="Ex: Barraca do João" />
+          </div>
 
-      <div className="form-group">
-        <label>E-mail *</label>
-        <input 
-          type="email" 
-          required 
-          placeholder="exemplo@email.com" 
-        />
-      </div>
+          <div className="form-group">
+            <label>CPF ou CNPJ *</label>
+            <input type="text" className="form-control" required placeholder="000.000.000-00" />
+          </div>
 
-      <div className="form-group">
-        <label>Localização da Banca</label>
-        <input 
-          type="text" 
-          placeholder="Ex: Corredor A, Banca 12" 
-        />
-      </div>
+          <div className="form-group">
+            <label>E-mail *</label>
+            <input type="email" className="form-control" required placeholder="contato@exemplo.com" />
+          </div>
 
-      <button type="submit" className="btn btn-success">
-        Guardar Feirante
-      </button>
-    </form>
+          <div className="form-group">
+            <label>Localização (Corredor/Vaga)</label>
+            <input type="text" className="form-control" placeholder="Ex: Setor Verde, Vaga 12" />
+          </div>
+        </div>
+
+        <div className="form-actions">
+          <button type="button" className="btn btn-secondary" onClick={() => navegar('listaFeirante')}>
+            Cancelar
+          </button>
+          <button type="submit" className="btn btn-primary">
+            Salvar Feirante
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }

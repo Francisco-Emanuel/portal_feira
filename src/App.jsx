@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import './App.css';
-
 import ListaFeirante from './pages/ListaFeirante';
 import FormFeirante from './pages/FormFeirante';
 import ListaProduto from './pages/ListaProduto';
 import FormProduto from './pages/FormProduto';
 
-function App() {
+export default function App() {
   const [telaAtual, setTelaAtual] = useState('listaFeirante');
   const [feiranteSelecionado, setFeiranteSelecionado] = useState(null);
 
@@ -16,45 +15,22 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <h1>Portal da Feira</h1>
-      <hr />
+    <div className="app-container">
+      <header className="header">
+        <h1>Portal da <span>Feira</span></h1>
+      </header>
       
-      {/* Roteamento por Estado */}
-      {telaAtual === 'listaFeirante' && (
-        <div>
-          <h2>Lista de Feirantes</h2>
-          <button className="btn btn-success" onClick={() => navegar('formFeirante')}>+ Novo Feirante</button>
-          { <ListaFeirante navegar={navegar} /> }
-        </div>
-      )}
-
-      {telaAtual === 'formFeirante' && (
-        <div>
-          <h2>Cadastro de Feirante</h2>
-          <button className="btn btn-primary" onClick={() => navegar('listaFeirante')}>Voltar</button>
-          { <FormFeirante navegar={navegar} /> }
-        </div>
-      )}
-
-      {telaAtual === 'listaProduto' && (
-        <div>
-          <h2>Produtos do Feirante ID: {feiranteSelecionado?.id}</h2>
-          <button className="btn btn-primary" onClick={() => navegar('listaFeirante')}>Voltar para Feirantes</button>
-          <button className="btn btn-success" onClick={() => navegar('formProduto')}>+ Novo Produto</button>
-          { <ListaProduto navegar={navegar} feirante={feiranteSelecionado} /> }
-        </div>
-      )}
-
-      {telaAtual === 'formProduto' && (
-        <div>
-          <h2>Cadastro de Produto</h2>
-          <button className="btn btn-primary" onClick={() => navegar('listaProduto')}>Voltar</button>
-          { <FormProduto navegar={navegar} feirante={feiranteSelecionado} /> }
-        </div>
-      )}
+      <main className="card">
+        {telaAtual === 'listaFeirante' && <ListaFeirante navegar={navegar} />}
+        {telaAtual === 'formFeirante' && <FormFeirante navegar={navegar} />}
+        
+        {telaAtual === 'listaProduto' && (
+          <ListaProduto navegar={navegar} feirante={feiranteSelecionado} />
+        )}
+        {telaAtual === 'formProduto' && (
+          <FormProduto navegar={navegar} feirante={feiranteSelecionado} />
+        )}
+      </main>
     </div>
   );
 }
-
-export default App;
