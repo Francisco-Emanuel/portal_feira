@@ -4,9 +4,12 @@ import ListaFeirante from './pages/ListaFeirante';
 import FormFeirante from './pages/FormFeirante';
 import ListaProduto from './pages/ListaProduto';
 import FormProduto from './pages/FormProduto';
+import VitrineConsumidor from './pages/VitrineConsumidor';
+import CarrinhoReserva from './pages/CarrinhoReserva';
+import DashboardFeirante from './pages/DashboardFeirante';
 
 export default function App() {
-  const [telaAtual, setTelaAtual] = useState('listaFeirante');
+  const [telaAtual, setTelaAtual] = useState('vitrine');
   const [feiranteSelecionado, setFeiranteSelecionado] = useState(null);
 
   const navegar = (tela, dados = null) => {
@@ -21,6 +24,9 @@ export default function App() {
       </header>
       
       <main className="card">
+        {telaAtual === 'vitrine' && <VitrineConsumidor navegar={navegar} />}
+        {telaAtual === 'carrinho' && <CarrinhoReserva navegar={navegar} produto={feiranteSelecionado} />}
+        {telaAtual === 'dashboard' && <DashboardFeirante navegar={navegar} feirante={feiranteSelecionado} />}
         {telaAtual === 'listaFeirante' && <ListaFeirante navegar={navegar} />}
         {telaAtual === 'formFeirante' && <FormFeirante navegar={navegar} />}
         
